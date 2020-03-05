@@ -12,6 +12,7 @@ using Microsoft.EntityFrameworkCore;
 using SubirImagenes.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using SubirImagenes.Models;
 
 namespace SubirImagenes
 {
@@ -35,6 +36,9 @@ namespace SubirImagenes
             });
 
             services.AddDbContext<ApplicationDbContext>(options =>
+                options.UseSqlServer(
+                    Configuration.GetConnectionString("DefaultConnection")));
+            services.AddDbContext<SubirImagenesContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
             services.AddDefaultIdentity<IdentityUser>()
